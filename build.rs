@@ -1,7 +1,11 @@
 fn main() {
-    // cc::Build::new().file("src/AES_RNG.hpp").compile("aes_rng");
+    let srcs = ["include/AES_RNG.cpp", "include/wrapper.cpp"];
+
+    cc::Build::new()
+        .files(srcs.iter())
+        .cpp(true)
+        .compile("wrapper");
+    // cxx_build::bridge("src/lib.rs").compile("aes_rng");
+
     println!("cargo:rustc-link-lib=cryptopp");
-    cpp_build::Config::new()
-        .include("src/cpp")
-        .build("src/lib.rs");
 }
